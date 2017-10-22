@@ -1,16 +1,39 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+use App\Bank;
+use App\Campaign;
+use App\Category;
+use App\Idtype;
+use App\Subcategory;
+
 
 Route::get('/', function () {
-    return view('welcome');
+	
+	//$campaigns = DB::table('campaigns')->get();
+
+	$campaigns = Campaign::ActiveCampaign()->get();
+
+	$categories = Category::ActiveCategory()->get();
+
+	$idtypes = Idtype::ActiveIdtype()->get();
+
+	$banks = Bank::ActiveBank()->get();
+    
+    return view('application', compact('campaigns', 'categories', 'idtypes', 'banks'));
+});
+
+
+Route::get('/subcategories/{category_id}', function ($id) {
+
+	$subcategories = Subcategory::subcategoryList($id)->get();
+
+	return Response::json($subcategories);
+});
+
+
+Route::get('/applications/{application}', function ($id) {
+	
+	$application = DB::table('applications')->find($id);
+
+	return $application;
 });
