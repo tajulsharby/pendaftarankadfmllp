@@ -56,7 +56,7 @@ class ApplicationsController extends Controller
             'account_number' => request('account_number')
         ]);
 
-        return redirect('/');
+        return redirect('/preview');
     }
 
     /**
@@ -120,6 +120,16 @@ class ApplicationsController extends Controller
         request()->photo_src->move(public_path('images'), $photo_name);
 
         return $photo_src;
+
+    }
+
+    public function preview($id)
+    {
+
+        $applications_preview = Application::PreviewApplication($id)->get();
+
+        
+        return view('preview', compact('applications_preview'));
 
     }
 }

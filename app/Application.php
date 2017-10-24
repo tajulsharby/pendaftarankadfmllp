@@ -21,4 +21,10 @@ class Application extends Model
     	'bank_id',
     	'account_number'
     ];
+
+    public function scopePreviewApplication($query, $id) {
+
+        return $query->where('id', '=', $id);
+ 
+    }
 }

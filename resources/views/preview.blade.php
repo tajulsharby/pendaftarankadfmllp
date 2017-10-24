@@ -9,7 +9,7 @@
 			<label>Kempen:</label>
 		</div>
 		<div class="column">
-			<span></span>
+			<span>{{ $campaign_id }}</span>
 		</div>
 	</div>
 

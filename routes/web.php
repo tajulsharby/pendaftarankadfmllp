@@ -10,6 +10,8 @@ use App\Subcategory;
 
 Route::get('/campaigns', 'CampaignsController@index');
 
+Route::get('/application/preview/{application_id}', 'ApplicationsController@preview');
+
 Route::get('/', function () {
 	
 	//$campaigns = DB::table('campaigns')->get();
