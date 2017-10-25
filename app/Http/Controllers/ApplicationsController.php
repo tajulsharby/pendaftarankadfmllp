@@ -92,7 +92,14 @@ class ApplicationsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $application = Application::find($id);
+
+        $application->status = 'SUBMITTED';
+        
+        $application->save();
+        
+        return redirect('/kadakreditasifmllp/submission')->with('success','Pendaftaran telah berjaya dihantar');
     }
 
     /**
@@ -136,4 +143,5 @@ class ApplicationsController extends Controller
         return view('kadakreditasifmllp.registrations.preview', compact('application'));
 
     }
+
 }

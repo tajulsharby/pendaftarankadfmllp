@@ -34,6 +34,12 @@ Route::get('/kadakreditasifmllp/pendaftaran', function () {
 
 Route::get('/kadakreditasifmllp/preview/{id}', 'ApplicationsController@preview');
 
+Route::get('/kadakreditasifmllp/submission', function () {
+
+	return view('kadakreditasifmllp.registrations.submission');
+
+});
+
 Route::get('/kadakreditasifmllp/subcategories/{category_id}', function ($id) {
 
 	$subcategories = Subcategory::subcategoryList($id)->get();
@@ -49,8 +55,9 @@ Route::get('/applications/{application}', function ($id) {
 	return $application;
 });
 
-
 Route::post('/applications', 'ApplicationsController@store');
+
+Route::patch('/applications/{id}', 'ApplicationsController@update');
 
 /* 
 Applications

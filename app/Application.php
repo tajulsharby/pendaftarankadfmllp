@@ -30,7 +30,8 @@ class Application extends Model
             ->join('organizations', 'applications.organization_id', '=', 'organizations.id')
             ->join('banks', 'applications.bank_id', '=', 'banks.id')
             ->join('campaigns', 'applications.campaign_id', '=', 'campaigns.id')
-            ->select('applications.name as name', 
+            ->select('applications.id as id', 
+                'applications.name as name', 
                 'applications.id_number as id_number', 
                 'applications.email as email', 
                 'applications.phone_number as phone_number', 
