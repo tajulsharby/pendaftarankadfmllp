@@ -8,13 +8,14 @@ use App\Idtype;
 use App\Subcategory;
 
 
-Route::get('/campaigns', 'CampaignsController@index');
-
-Route::get('/application/preview/{application_id}', 'ApplicationsController@preview');
-
 Route::get('/', function () {
 	
-	//$campaigns = DB::table('campaigns')->get();
+	return redirect('kadakreditasifmllp/pendaftaran');
+});
+
+Route::get('/campaigns', 'CampaignsController@index');
+
+Route::get('/kadakreditasifmllp/pendaftaran', function () {
 
 	$campaigns = Campaign::ActiveCampaign()->get();
 
@@ -26,9 +27,11 @@ Route::get('/', function () {
 
 	$banks = Bank::ActiveBank()->get();
     
-    return view('application', compact('campaigns', 'categories', 'organizations', 'idtypes', 'banks'));
+    return view('kadakreditasifmllp.registrations.registration', compact('campaigns', 'categories', 'organizations', 'idtypes', 'banks'));
+
 });
 
+Route::get('/application/preview/{application_id}', 'ApplicationsController@preview');
 
 Route::get('/subcategories/{category_id}', function ($id) {
 
