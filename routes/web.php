@@ -1,5 +1,6 @@
 <?php
 
+use App\Application;
 use App\Bank;
 use App\Campaign;
 use App\Category;
@@ -31,9 +32,9 @@ Route::get('/kadakreditasifmllp/pendaftaran', function () {
 
 });
 
-Route::get('/application/preview/{application_id}', 'ApplicationsController@preview');
+Route::get('/kadakreditasifmllp/preview/{id}', 'ApplicationsController@preview');
 
-Route::get('/subcategories/{category_id}', function ($id) {
+Route::get('/kadakreditasifmllp/subcategories/{category_id}', function ($id) {
 
 	$subcategories = Subcategory::subcategoryList($id)->get();
 

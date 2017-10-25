@@ -22,9 +22,35 @@ class Application extends Model
     	'account_number'
     ];
 
-    public function scopePreviewApplication($query, $id) {
+    public function scopeApplicationPreview($query, $id) {
 
-        return $query->where('id', '=', $id);
+        $rs = $query->join('categories', 'applications.category_id', '=', 'categories.id')
+            ->join('subcategories', 'applications.subcategory_id', '=', 'subcategories.id')
+            ->join('idtypes', 'applications.id_type', '=', 'idtypes.id')
+            ->join('organizations', 'applications.organization_id', '=', 'organizations.id')
+            ->join('banks', 'applications.bank_id', '=', 'banks.id')
+            ->join('campaigns', 'applications.campaign_id', '=', 'campaigns.id')
+            ->select('applications.name as name', 
+                'applications.id_number as id_number', 
+                'applications.email as email', 
+                'applications.phone_number as phone_number', 
+                'applications.account_number as account_number', 
+                'applications.jersey_number as jersey_number', 
+                'applications.photo_src as photo_src', 
+                'campaigns.name as campaign', 
+                'categories.name as category', 
+                'subcategories.name as sub_category',
+                'idtypes.name as id_type', 
+                'organizations.name as organization', 
+                'banks.name as bank',  
+                'subcategories.name as sub_category')
+            ->where('applications.id', '=', $id)
+            ->get();
+
+        return $rs;
+
+        //return $query->where('id', '=', $id);
  
     }
+
 }

@@ -40,7 +40,7 @@ class ApplicationsController extends Controller
 
         $photo_src = $this->photoUpload($request);
 
-        Application::create([
+        $newApplicaton = Application::create([
             'campaign_id' => request('campaign_id'),
             'name' => request('name'),
             'id_type' => request('id_type'),
@@ -56,7 +56,9 @@ class ApplicationsController extends Controller
             'account_number' => request('account_number')
         ]);
 
-        return redirect('/preview');
+        $lastInsertedId = $newApplicaton->id;
+
+        return redirect('/kadakreditasifmllp/preview/' . $lastInsertedId);
     }
 
     /**
@@ -115,9 +117,11 @@ class ApplicationsController extends Controller
 
         $photo_name = time() . '.' . request()->photo_src->getClientOriginalExtension();
 
-        $photo_src = public_path('images') . '/' . $photo_name;
+        //$photo_src = public_path('images') . '/' . $photo_name;
 
-        request()->photo_src->move(public_path('images'), $photo_name);
+        $photo_src =  '/images/photos/' . $photo_name;
+
+        request()->photo_src->move(public_path('images') . '/photos/', $photo_name);
 
         return $photo_src;
 
@@ -125,11 +129,11 @@ class ApplicationsController extends Controller
 
     public function preview($id)
     {
+        //$application = Application::find($id);
+      
+        $application = Application::ApplicationPreview($id)->first()->toArray();
 
-        $applications_preview = Application::PreviewApplication($id)->get();
-
-        
-        return view('preview', compact('applications_preview'));
+        return view('kadakreditasifmllp.registrations.preview', compact('application'));
 
     }
 }
