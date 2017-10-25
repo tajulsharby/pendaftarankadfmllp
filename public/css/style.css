@@ -1,0 +1,21 @@
+body {
+  padding-top: 7rem;
+  padding-bottom: 3rem;
+}
+
+.navbar {
+  background-color: #004B91 !important;
+}
+
+.navbar-brand {
+  padding-top: 2.25rem;
+}
+
+.logo {
+  background: transparent url("../images/football_malaysia_llp_logo.png") no-repeat left top;
+  background-size: 50% auto;
+  display: block;
+  width: 50%;
+  height: 100%;
+  text-indent: -999px;
+}

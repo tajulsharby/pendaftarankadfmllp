@@ -15,6 +15,9 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 
 	<!-- CSS -->
+
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+
 	<style type="text/css">
 		.hidden {
 			display: none;
@@ -24,8 +27,14 @@
 </head>
 <body>
 
+	<nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse fixed-top header">
+
+		<a class="navbar-brand logo" href="#">Navbar</a>
+
+	</nav>
+
 	<div class="container">
-		
+
 		@yield('content')
 
 	</div>
