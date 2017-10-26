@@ -22,7 +22,7 @@
 			</div>
 
 			<div class="form-group">
-				<label>Nama:</label>
+				<label>Nama (Tidak melebihi 20 huruf):</label>
 				<input name="name" class="form-control" type="text" placeholder="Nama" id="input_nama" />
 			</div>
 
@@ -151,7 +151,7 @@
 
 	        	});
 
-	        	if ( category_name == "Sukarelawan" )
+	        	if ( category_name == "SUKARELAWAN" )
 	        		$( '.bankakaun-container' ).show();
 	        	else
 	        		$( '.bankakaun-container' ).css('display','none');
