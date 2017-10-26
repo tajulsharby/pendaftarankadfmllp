@@ -19,3 +19,12 @@ body {
   height: 100%;
   text-indent: -999px;
 }
+
+.photo-sample {
+  width: 140pt;
+  height: 200pt;
+}
+
+.hidden {
+  display: none;
+}

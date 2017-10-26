@@ -2,7 +2,7 @@
 
 @section('content')
 	
-	<h3>Preview Maklumat</h3>
+	<h3>Preview Maklumat</h3><br  />
 
 	<form method="post" action="{{action('ApplicationsController@update', $application['id'])}}">
 
@@ -85,6 +85,15 @@
 			</div>
 			<div class="column">
 				<span>{{ $application['organization'] }}</span>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="column">
+				<label>Surat pengesahan editor media:</label>
+			</div>
+			<div class="column">
+				<span><a href="{{ $application['letter_src'] }}" target="_blank">Dilampirkan</a></span>
 			</div>
 		</div>
 

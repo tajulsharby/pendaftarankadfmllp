@@ -40,6 +40,12 @@ class ApplicationsController extends Controller
 
         $photo_src = $this->photoUpload($request);
 
+        $letter_src = null;
+
+        if ($request->has('letter_src'))
+
+            $letter_src = $this->letterUpload($request);
+
         $newApplicaton = Application::create([
             'campaign_id' => request('campaign_id'),
             'name' => request('name'),
@@ -52,6 +58,7 @@ class ApplicationsController extends Controller
             'email' => request('email'),
             'phone_number' => request('phone_number'),
             'photo_src' => $photo_src,
+            'letter_src' => $letter_src,
             'bank_id' => request('bank_id'),
             'account_number' => request('account_number')
         ]);
@@ -118,7 +125,7 @@ class ApplicationsController extends Controller
 
         request()->validate([
 
-            'photo_src' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'photo_src' => 'image|mimes:jpeg,png,jpg|max:2048',
 
         ]);
 
@@ -131,6 +138,25 @@ class ApplicationsController extends Controller
         request()->photo_src->move(public_path('images') . '/photos/', $photo_name);
 
         return $photo_src;
+
+    }
+
+    public function letterUpload(Request $request)
+    {
+
+        request()->validate([
+
+            'letter_src' => 'mimes:doc,docx,pdf|max:2048',
+
+        ]);
+
+        $letter_name = time() . '.' . request()->letter_src->getClientOriginalExtension();
+
+        $letter_src =  '/docs/' . $letter_name;
+
+        request()->letter_src->move(public_path('docs'), $letter_name);
+
+        return $letter_src;
 
     }
 

@@ -9,7 +9,8 @@ class Category extends Model
     
     public function scopeActiveCategory($query) {
 
-    	return $query->where('status', '=', 'ACTIVE');
+    	return $query->where('status', '=', 'ACTIVE')->orderBy('name', 'asc')
+;
  
     }
 

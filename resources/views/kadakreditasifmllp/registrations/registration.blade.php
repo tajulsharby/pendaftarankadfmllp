@@ -2,8 +2,10 @@
 
 @section('content')
 
-	<h3>Permohonan Kad Akreditasi</h3>
-	
+	<h3>Permohonan Kad Akreditasi</h3><br  />
+
+	@include('layouts.notification')
+
 	<div class="form-container">
 
 		<form method="POST" action="/applications" enctype="multipart/form-data">
@@ -38,11 +40,6 @@
 				<input name="id_number" class="form-control" type="text" placeholder="Nombor Kad Pengenalan" id="input_nomborid" />
 			</div>
 
-			<div class="form-group hidden" id="nojersi-container">
-				<label id="label_nojersi">Nombor Jersi:</label>
-				<input name="jersey_number" class="form-control" type="text" placeholder="Nombor Jersi" id="input_nojersi" />
-			</div>
-
 			<div class="form-group">
 				<label>Kategori:</label>
 				<select name="category_id" class="form-control" id="select_kategori">
@@ -57,6 +54,17 @@
 				<select name="subcategory_id" class="form-control" id="select_subkategori">
 					<option>Pilih di sini</option>
 				</select>
+			</div>
+
+			<div class="form-group hidden" id="nojersi-container">
+				<label id="label_nojersi">Nombor Jersi:</label>
+				<input name="jersey_number" class="form-control" type="text" placeholder="Nombor Jersi" id="input_nojersi" />
+			</div>
+
+			<div class="form-group hidden" id="suratpengesahan-container">
+				<label>Surat pengesahan editor media:</label>
+				<input name="letter_src" type="file" class="form-control-file" id="file_surat">
+				<span>Fail format yang diterima: pdf, doc, docx tidak melebihi saiz 2MB</span>
 			</div>
 
 			<div class="form-group">
@@ -79,12 +87,16 @@
 			</div>
 
 			<div class="form-group">
-				<label>Gambar:</label>
-				<input name="photo_src" type="file" class="form-control-file" id="file_gambar">
-				<!--<input name="photo_src" class="form-control" type="text" placeholder="Photo Source" id="input_photosrc" />-->
+				<img class="photo-sample" src="/images/passport_size_photo.png" />
 			</div>
 
 			<div class="form-group">
+				<label>Gambar ukuran passport (50mm x 35mm):</label>
+				<input name="photo_src" type="file" class="form-control-file" id="file_gambar">
+				<span>Fail format yang diterima: png, jpeg, jpg, bmp tidak melebihi saiz 2MB</span>
+			</div>
+
+			<div class="form-group bankakaun-container hidden">
 				<label>Bank (Untuk sukarelawan sahaja):</label>
 				<select name="bank_id" class="form-control" id="select_bank">
 					@foreach ($banks as $bank)
@@ -93,7 +105,7 @@
 				</select>
 			</div>
 
-			<div class="form-group">
+			<div class="form-group bankakaun-container hidden">
 				<label>Nombor Akaun:</label>
 				<input name="account_number" class="form-control" type="text" placeholder="Nombor akaun" id="input_nomborakaun" />
 			</div>
@@ -115,17 +127,17 @@
 		$(document).ready(function(){
 			
 			$("#select_jenisid").change(function() {
+  				
   				idtype = $(this).val();
-  				console.log('Jenis ID:' + idtype);
+			
 			});
 
 			// Kategori
 			$( "#select_kategori" ).change(function() {
 
-				category_id = $(this).val();
+				var category_id = $(this).val();
+				var category_name = $( 'option:selected', this ).text();
   				
-  				console.log('Kategori:' + category_id);
-
   				$.get('subcategories/' + category_id, function (data) {
    					
 	   				$( '#select_subkategori > option' ).remove();
@@ -137,25 +149,43 @@
 	        		
 	        		});
 
-	        	});	 
+	        	});
+
+	        	if ( category_name == "Sukarelawan" )
+	        		$( '.bankakaun-container' ).show();
+	        	else
+	        		$( '.bankakaun-container' ).css('display','none');
+
+				if ( category_name == "PRESS" || category_name == "PHOTOGRAPHER" || category_name == "NON-RIGHT HOST" || category_name == "HOST BROADCASTER" || category_name == "OFFICIAL PHOTOGRAPHER" )
+					$( '#suratpengesahan-container' ).show();
+				else
+					$( '#suratpengesahan-container' ).css('display','none');
 
 			});
 
 			// Nombor ID
 			$( '#select_jenisid' ).change(function() {
 
-				var jenisid = $( '#select_jenisid option:selected' ).text();
+				var id_type = $( '#select_jenisid option:selected' ).text();
 
-				$( '#label_noid' ).text(jenisid);
+				$( '#label_noid' ).text('Nombor ' + id_type);
 
-				$( '#input_nomborid' ).attr('placeholder', jenisid);
+				$( '#input_nomborid' ).attr('placeholder', 'Nombor ' + id_type);
+			
+			});
 
-				if (jenisid == "FIFA ID")
+			$( '#select_subkategori' ).change(function() {
+
+				var sub_category = $( 'option:selected', this ).text();
+
+				if ( sub_category == "PEMAIN" )
 					$('#nojersi-container').show();
 				else
 					$('#nojersi-container').css('display','none');
-			
+
 			});
+
+			// Category ID for media: 9, 10, 11, 12
 
 		});
 

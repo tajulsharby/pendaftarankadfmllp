@@ -8,7 +8,8 @@ class Subcategory extends Model
 {
     public function scopeSubcategoryList($query, $id) {
 
-    	return $query->where('category_id', '=', $id);
+    	return $query->where('category_id', '=', $id)->orderBy('name', 'asc')
+;
  
     }
 }

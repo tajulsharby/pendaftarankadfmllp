@@ -16,13 +16,7 @@
 
 	<!-- CSS -->
 
-	<link rel="stylesheet" type="text/css" href="/css/style.css">
-
-	<style type="text/css">
-		.hidden {
-			display: none;
-		}
-	</style>
+	<link rel="stylesheet" type="text/css" href="{{asset('css/style.css')}}">
 
 </head>
 <body>

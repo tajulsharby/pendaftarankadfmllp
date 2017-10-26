@@ -18,6 +18,7 @@ class Application extends Model
     	'email',
     	'phone_number',
     	'photo_src',
+        'letter_src',
     	'bank_id',
     	'account_number'
     ];
@@ -37,7 +38,8 @@ class Application extends Model
                 'applications.phone_number as phone_number', 
                 'applications.account_number as account_number', 
                 'applications.jersey_number as jersey_number', 
-                'applications.photo_src as photo_src', 
+                'applications.photo_src as photo_src',
+                'applications.letter_src as letter_src', 
                 'campaigns.name as campaign', 
                 'categories.name as category', 
                 'subcategories.name as sub_category',

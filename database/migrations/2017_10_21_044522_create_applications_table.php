@@ -18,7 +18,7 @@ class CreateApplicationsTable extends Migration
             $table->integer('campaign_id');
             $table->string('name');
             $table->integer('id_type')->references('id')->on('idtypes');
-            $table->string('id_number');
+            $table->string('id_number')->unique();
             $table->integer('jersey_number')->nullable();
             $table->integer('organization_id')->references('id')->on('organizations')->nullable();
             $table->integer('category_id')->references('id')->on('categories');
@@ -26,6 +26,7 @@ class CreateApplicationsTable extends Migration
             $table->string('email');
             $table->string('phone_number');
             $table->string('photo_src');
+            $table->string('letter_src')->nullable();
             $table->integer('bank_id')->references('id')->on('banks')->nullable();
             $table->string('account_number')->nullable();
             $table->string('status')->default('DRAFT');
