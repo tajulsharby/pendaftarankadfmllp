@@ -117,7 +117,11 @@ class ApplicationsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $application = Application::find($id);
+
+        $application->delete();
+
+        return redirect('/kadakreditasifmllp/pendaftaran');
     }
 
     public function photoUpload(Request $request)

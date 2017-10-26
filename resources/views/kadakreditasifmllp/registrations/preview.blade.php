@@ -4,12 +4,6 @@
 	
 	<h3>Preview Maklumat</h3><br  />
 
-	<form method="post" action="{{action('ApplicationsController@update', $application['id'])}}">
-
-		{{ csrf_field() }}
-
-		<input name="_method" type="hidden" value="PATCH">
-
 		<div class="row">
 			<div class="column">
 				<img src="{{ $application['photo_src'] }}" />
@@ -52,6 +46,8 @@
 			</div>
 		</div>
 
+		@if (!empty($application['jersey_number']))
+
 		<div class="row">
 			<div class="column">
 				<label>Nombor Jersi:</label>
@@ -60,6 +56,8 @@
 				<span>{{ $application['jersey_number'] }}</span>
 			</div>
 		</div>
+
+		@endif
 
 		<div class="row">
 			<div class="column">
@@ -88,6 +86,8 @@
 			</div>
 		</div>
 
+		@if (!empty($application['letter_src']))
+
 		<div class="row">
 			<div class="column">
 				<label>Surat pengesahan editor media:</label>
@@ -96,6 +96,8 @@
 				<span><a href="{{ $application['letter_src'] }}" target="_blank">Dilampirkan</a></span>
 			</div>
 		</div>
+
+		@endif
 
 		<div class="row">
 			<div class="column">
@@ -115,6 +117,8 @@
 			</div>
 		</div>
 
+		@if ($application['category'] == 'Sukarelawan')
+
 		<div class="row">
 			<div class="column">
 				<label>Bank:</label>
@@ -133,11 +137,39 @@
 			</div>
 		</div>
 
-		<button type="submit" class="btn btn-primary" id="btn-submit-form">Hantar</button>
+		@endif
 
-		<button type="clear" class="btn btn-secondary">Edit</button>
+		<div class="row">
 
-	</form>
+			<div class="column form-column">
+
+				<form method="post" action="{{action('ApplicationsController@update', $application['id'])}}">
+
+					{{ csrf_field() }}
+
+					<input name="_method" type="hidden" value="PATCH">		
+
+					<button type="submit" class="btn btn-primary" id="btn-submit-form">Hantar</button>
+
+				</form>
+
+			</div>
+
+			<div class="column form-column">
+
+				<form method="post" action="{{action('ApplicationsController@destroy', $application['id'])}}">
+
+					{{ csrf_field() }}
+
+					<input name="_method" type="hidden" value="DELETE">
+
+					<button type="submit" class="btn btn-secondary">Batal</button>
+
+				</form>
+
+			</div>
+
+		</div>
 
 @endsection
 

@@ -59,6 +59,8 @@ Route::post('/applications', 'ApplicationsController@store');
 
 Route::patch('/applications/{id}', 'ApplicationsController@update');
 
+Route::delete('/applications/{id}', 'ApplicationsController@destroy');
+
 /* 
 Applications
 
