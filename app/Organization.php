@@ -8,7 +8,7 @@ class Organization extends Model
 {
     public function scopeActiveOrganization($query) {
 
-    	return $query->where('status', '=', 'ACTIVE');
+    	return $query->where('status', '=', 'ACTIVE')->orderBy('name', 'asc');
  
     }
 }
