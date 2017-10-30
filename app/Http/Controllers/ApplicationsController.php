@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Application;
 
+use Barryvdh\DomPDF\Facade as PDF;
+
 class ApplicationsController extends Controller
 {
     /**
@@ -172,6 +174,12 @@ class ApplicationsController extends Controller
 
         return view('kadakreditasifmllp.registrations.preview', compact('application'));
 
+    }
+
+    public function generatePDF()
+    {
+        $pdf = PDF::loadView('welcome');
+        return $pdf->download('invoice.pdf');
     }
 
 }

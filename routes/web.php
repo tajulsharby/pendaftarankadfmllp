@@ -18,7 +18,7 @@ Route::get('/campaigns', 'CampaignsController@index');
 
 Route::get('/kadakreditasifmllp/pendaftaran', function () {
 
-	$campaigns = Campaign::ActiveCampaign()->get();
+	/*$campaigns = Campaign::ActiveCampaign()->get();
 
 	$categories = Category::ActiveCategory()->get();
 
@@ -28,7 +28,9 @@ Route::get('/kadakreditasifmllp/pendaftaran', function () {
 
 	$banks = Bank::ActiveBank()->get();
     
-    return view('kadakreditasifmllp.registrations.registration', compact('campaigns', 'categories', 'organizations', 'idtypes', 'banks'));
+    return view('kadakreditasifmllp.registrations.registration', compact('campaigns', 'categories', 'organizations', 'idtypes', 'banks'));*/
+
+    return view('kadakreditasifmllp.registrations.close');
 
 });
 
@@ -60,6 +62,8 @@ Route::post('/applications', 'ApplicationsController@store');
 Route::patch('/applications/{id}', 'ApplicationsController@update');
 
 Route::delete('/applications/{id}', 'ApplicationsController@destroy');
+
+Route::get( '/kadakreditasifmllp/applications/generate', 'ApplicationsController@generatePDF' );
 
 /* 
 Applications
